@@ -28,7 +28,9 @@ In very simple games, a Q-table is implemented, which contains all possible stat
 ### Forming the Q-table*
 
 The first thing we need to do is to program the bot to learn what the winning moves are. The bot learns this through experience over lots of playing and exploring using the aforementioned algorithm. The table comprises of many states, with values for most of the actions possible on that state. The longer we calculate this Q-table, the more optimized are our bot's moves. Here's the code for the core function that calculates the Q-values for a given state, and puts them into a table.
+
 {% highlight python %}
+
 import numpy as np
 import time
 
@@ -57,7 +59,8 @@ for i in range(16):
 	col1 = getActionNumber(action)
 	table[row1][col1] = gam
 	gam*=0.9
-(% endhighlight}
+	
+(% endhighlight %}
 
 This is iterated over many randomly generated terminal states with 5,7,9...15 number of total elements, to arrive at the final Q-table.
 
