@@ -60,7 +60,7 @@ for i in range(16):
 	table[row1][col1] = gam
 	gam*=0.9
 	
-(% endhighlight %}
+{% endhighlight %}
 
 This is iterated over many randomly generated terminal states with 5,7,9...15 number of total elements, to arrive at the final Q-table.
 
