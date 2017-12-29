@@ -29,7 +29,7 @@ In very simple games, a Q-table is implemented, which contains all possible stat
 
 The first thing we need to do is to program the bot to learn what the winning moves are. The bot learns this through experience over lots of playing and exploring using the aforementioned algorithm. The table comprises of many states, with values for most of the actions possible on that state. The longer we calculate this Q-table, the more optimized are our bot's moves. Here's the code for the core function that calculates the Q-values for a given state, and puts them into a table.
 
-~~~python
+'''python
 import numpy as np
 import time
 
@@ -58,7 +58,7 @@ for i in range(16):
 	col1 = getActionNumber(action)
 	table[row1][col1] = gam
 	gam*=0.9
-~~~
+'''
 
 This is iterated over many randomly generated terminal states with 5,7,9...15 number of total elements, to arrive at the final Q-table.
 
@@ -110,7 +110,8 @@ We want our bot to prefer victory, a draw,a loss and then finally an unacceptabl
 So now that the basics are out of the way, let's get more technical. Q-learning has to be implemented separately in separate games keeping the foundational principles in mind. Since our game involves two players playing in turns, <strong>we need two neural networks to achieve learning</strong>. I'm using keras to implement two sequential models of fully connected neural networks, that will be fighting each other with interdependant cost functions (more about this in the next section). Each neural net will have the formation and constraints that I've previously introduced, with the reward function making sure that it learns the right things.
 
 Here is the code for the two networks simultaneously competing to learn the game:
-~~~python
+
+'''python
 import Qtable as table
 import numpy as np
 import random
@@ -316,7 +317,8 @@ for i in range(1):
         state = np.add(state,table.TakeAction2(state))
         print(state)
 print(wins)
-~~~
+'''
+
 So that's about it! Some basic things to note were that I tinkered with the epoch numbers, iteration numbers and the learning rates of each model individually and the aforementioned is the best combination that I could come up with. Any suggestions and/or improvements would be greatly appreciated!
 
 ### How is this working? What's really happening?
