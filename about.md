@@ -22,7 +22,7 @@ published: true
 
 <h2 align = "center">Parth Kashikar</h2>
 
-<p align = "center">Sophomore at BITS Pilani, Pilani Campus, India,Pursuing MSc. Physics and B.E. Electronics and Instrumentation.</p>
+<p align = "center">Sophomore at BITS Pilani, Pilani Campus, India,Pursuing B.E. (Electronics and Instrumentation) and MSc. (Physics)</p>
 
 <p align = "center">This blog is dedicated to my learning and experimentation in the fields of AI and Machine Learning.</p>
 
