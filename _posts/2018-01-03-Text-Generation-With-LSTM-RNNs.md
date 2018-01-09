@@ -98,7 +98,7 @@ Another similar problem similar to the vanishing problem is <strong>the explodin
 LSTMs help preserve the error that can be backpropagated through time and layers. By maintaining a more constant error, they allow recurrent nets to continue to learn over many time steps (over 1000), thereby opening a channel to link causes and effects remotely. This is one of the central challenges to machine learning and AI, since algorithms are frequently confronted by environments where reward signals are sparse and delayed, such as life itself. (Religious thinkers have tackled this same problem with ideas of karma or divine reward, theorizing invisible and distant consequences to our actions).
 
 <figure>
-	<img src="../uploads/lstm.png"> 
+	<img src="../uploads/lstm.PNG"> 
 	<figcaption style="color:black;">A typical LSTM representation, steps qualified below</figcaption>
 </figure><br>
 
@@ -108,12 +108,12 @@ In a typical LSTM cell, devoid of further modifications, there are two major ste
 <ol>
 	<li><strong>Cell state updation</strong></li>
 	<ul>
-		<li><strong>Forget layer gate</strong><br>The first gate outputs a number between 0 and 1 (with the sigmoid activation) after looking at the previous hidden state and the input for the current timestep, for each number in the cell state, followed by a simple matmul.<img src="../uploads/forget.png"></li>
-		<li><strong>Input layer gate</strong><br>The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the “input gate layer” decides which values we’ll update. Next, a tanh layer creates a vector of new candidate values, C(t), that could be added to the state. In the next step, we’ll combine these two to create an update to the state.<img src="../uploads/cellstate.png"></li>
-		<li>The following operation is performed on the cell state to update its information for the given timestep:<img src="../uploads/cellupdate.png"></li>
+		<li><strong>Forget layer gate</strong><br>The first gate outputs a number between 0 and 1 (with the sigmoid activation) after looking at the previous hidden state and the input for the current timestep, for each number in the cell state, followed by a simple matmul.<img src="../uploads/forget.PNG"></li>
+		<li><strong>Input layer gate</strong><br>The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the “input gate layer” decides which values we’ll update. Next, a tanh layer creates a vector of new candidate values, C(t), that could be added to the state. In the next step, we’ll combine these two to create an update to the state.<img src="../uploads/cellstate.PNG"></li>
+		<li>The following operation is performed on the cell state to update its information for the given timestep:<img src="../uploads/cellupdate.PNG"></li>
 	</ul>
 	<br>
-	<li><strong>Output formation gate</strong><br>The output is based on a filtered version of the cell state. The neural network gate decides what to output and what to reject, and this is multiplied with a sqaushed version of the cell state to obtain the final output for the next cell.<img src="../uploads/output.png"></li>
+	<li><strong>Output formation gate</strong><br>The output is based on a filtered version of the cell state. The neural network gate decides what to output and what to reject, and this is multiplied with a sqaushed version of the cell state to obtain the final output for the next cell.<img src="../uploads/output.PNG"></li>
 </ol>
 ### Clearly, the aforementioned mechanism is being followed in this sort of mathematical setup with information persistency being the main goal in mind. 
 <br>
@@ -173,13 +173,13 @@ The neural network is given a random seed of 100 characters chosen from the inpu
 
 A very important highlight here is that the network worked only on one textbook "Alice in Wonderland", and was <strong>not</strong> entirely CuDNN and CUDA optimized. Clearly, it shows the tremendous potential of LSTM RNN's in analysis of sequential-natured data. The following are the results of training the network (for 4 hours initially and later for about 13 hours):<br>
 <figure>
-	<img src="../uploads/lstmresult.png"> 
+	<img src="../uploads/lstmresult.PNG"> 
 	<figcaption style="color:black;">Results after 4 hours of training</figcaption>
 </figure><br>
 As it can be seen, one of the outputs has become an infinite loop. This can happen due to the 'temperature' of the softmax function being used in the keras model. Altering this parameter will lead to better outputs. Temperature is a hyperparameter of LSTMs (and neural networks generally) used to control the randomness of predictions by scaling the logits before applying softmax. Performing softmax on larger values makes the LSTM more confident (less input is needed to activate the output layer) but also more conservative in its samples (it is less likely to sample from unlikely candidates). Using a higher temperature produces a softer probability distribution over the classes, and makes the RNN more “easily excited” by samples, resulting in more diversity and also more mistakes.
 {: .notice}
 <figure>
-	<img src="../uploads/lstmresult2.png"> 
+	<img src="../uploads/lstmresult2.PNG"> 
 	<figcaption style="color:black;">After 13 hours of training</figcaption>
 </figure><br>
 
