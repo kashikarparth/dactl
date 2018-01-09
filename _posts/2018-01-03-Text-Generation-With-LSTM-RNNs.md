@@ -95,10 +95,10 @@ Another similar problem similar to the vanishing problem is <strong>the explodin
 ## Long Short Term Memory Recurrent Neural Networks
 <br>As we have seen earlier, the vanishing gradient problem needs to be tackled by some sort of <strong>direct</strong> information that is transmitted throughout the network, and not mixed in some hidden layer message as is the case in RNNs, to remove gradient dependencies and prevent vanishing over timesteps.
 
-LSTMs help preserve the error that can be backpropagated through time and layers. By maintaining a more constant error, they allow recurrent nets to continue to learn over many time steps (over 1000), thereby opening a channel to link causes and effects remotely. This is one of the central challenges to machine learning and AI, since algorithms are frequently confronted by environments where reward signals are sparse and delayed, such as life itself. (Religious thinkers have tackled this same problem with ideas of karma or divine reward, theorizing invisible and distant consequences to our actions).
+LSTMs help preserve the error that can be backpropagated through time and layers. By maintaining a more constant error, they allow recurrent nets to continue to learn over many time steps (over 1000), thereby opening a channel to link causes and effects remotely. This is one of the central challenges to machine learning and AI, since algorithms are frequently confronted by environments where reward signals are sparse and delayed.
 
 <figure>
-	<img src="../uploads/lstm.PNG"> 
+	<img src="../uploads/lstm.png"> 
 	<figcaption style="color:black;">A typical LSTM representation, steps qualified below</figcaption>
 </figure><br>
 
@@ -185,7 +185,7 @@ As it can be seen, one of the outputs has become an infinite loop. This can happ
 
 You can clearly see improvement in spellings and sense alike. The network <strong>architecture</strong> is clearly capable of learning English almost perfectly, given the computation power and input text corpus to work with. Witht eh right amount of training to keep overfitting in check, our desired results are very much possible.
 
-## Suggested Readings and sources
+## Suggested Readings and Sources
 <ul>
 <li><a href = "http://karpathy.github.io/2015/05/21/rnn-effectiveness/">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a></li>
 <li><a href = "http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/">http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/</a></li>
