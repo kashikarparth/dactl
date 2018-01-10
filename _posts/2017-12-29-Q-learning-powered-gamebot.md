@@ -387,7 +387,7 @@ The following is a randomly picked example that 'model1' (X player) played vs a 
 
 =======================================
 
-Clearly, the bot has learnt the rules of the game, and how to win the game. From my observations, further improvements can be made in the field of defense and even more optimization in the moves is still possible. In my opinion, further micoadjustments in the neural network configuration and training rates can lead to an even higher winrate, and possibly even a perfect bot.
+Clearly, the bot has learnt the rules of the game, and how to win the game. From my observations, further improvements can be made in the field of defense and even more optimization in the moves is still possible. In my opinion, further microadjustments in the neural network configuration and training rates can lead to an even higher winrate, and possibly even a perfect bot.
 
 That concludes my current experiments in the field of Q-learning with neural networks.
 
