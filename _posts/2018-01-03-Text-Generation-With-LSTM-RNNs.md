@@ -183,7 +183,7 @@ As it can be seen, one of the outputs has become an infinite loop. This can happ
 	<figcaption style="color:black;">After 13 hours of training</figcaption>
 </figure><br>
 
-You can clearly see improvement in spellings and sense alike. The network <strong>architecture</strong> is clearly capable of learning English almost perfectly, given the computation power and input text corpus to work with. Witht eh right amount of training to keep overfitting in check, our desired results are very much possible.
+You can clearly see improvement in spellings and sense alike. The network <strong>architecture</strong> is clearly capable of learning English almost perfectly, given the computation power and input text corpus to work with. With the right amount of training to keep overfitting in check, our desired results are very much possible.
 
 ## Suggested Readings and Sources
 <ul>
