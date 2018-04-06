@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Important techniques for Deep Learning Models"
-hero: ../uploads/cogs-and-gears-icon-vector-illustration-isolated.jpg
+hero: ../uploads/gears.jpg
 overlay: red
 published: true
 ---
