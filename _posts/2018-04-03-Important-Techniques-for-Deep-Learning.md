@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Important techniques for Deep Learning Models"
-hero: ../uploads/gears.jpg
+hero: ../uploads/cogs-and-gears-icon-vector-illustration-isolated.jpg
 overlay: red
 published: true
 ---
@@ -28,4 +28,24 @@ The <b>math behind dropout</b> is pretty straightforward. During training, in ev
 
 During testing time, we simply replace the binary mask vector with the expectation vector. This means that if 'p' was 0.5, the mask will now be replaced with a vector containing 0.5 for every node in that given layer of nodes. This can be shown rigourously to be equivalent to a geometric mean for all the reduced neural networks generated with the binary masks, and can be thought of as the "average neural network" for the given dropout regularization. 
 
-A disadvantage of dropout is that the cost function is not stable in definition, as the parameters internally are vaninishing and coming into existence. This leads to a slower convergence which is slightly unstable in nature but each forward and backward pass is faster, as some nodes are not functional. The results after convergence are more generalized, as was the whole point. Keras has a really simple way of implementing dropouts in their models, and I urge the reader to try training a simple CNN on MNIST with and without dropout to see the difference. 
+A disadvantage of dropout is that the loss function is not stable in definition, as the parameters internally are vaninishing and coming into existence. This leads to a slower convergence which is slightly unstable in nature but each forward and backward pass is faster, as some nodes are not functional. The results after convergence are more generalized, as was the whole point. Keras has a really simple way of implementing dropouts in their models (just 1 additional line of code to the model per layer), and I urge the reader to try training a simple CNN on MNIST with and without dropout to see the difference.
+
+## Batch Normalisation
+
+To understand why Batch Normalisation was proposed, let's first understand the simple procedure of noramlising a given set of values.   
+
+<img src="../uploads/bn1.png"> 
+
+This generates a set of "nomarlised" datapoints with a mean of 0 and standard deviation 1. The feature-space that is fed into a neural network is usually normalised (not necessarily true always, because normalisation does lead to loss of information regarding units,magnitudes etc.). The reason behind doing so is that normalisation helps in improving the stability of the optimization algorithms that the data and the weights are being exposed to. A large variation in values of a given feature, and similary between the simultaneous values of different features leads to large variations in the weights and activations between the layers of the network, which can eventually lead to learning instability because of exploding gradients and a considerably volatile loss-function in general. 
+
+Another problem faced by neural networks (even with feature data normalisation) is the problem of "Covariate Shift". This problem occurs when the network is shown and trained on a given dataset, and a more generalised form of the data is being tested on. The neural network shows less accuracy if the testing dataset is not a close representation of the training data, even if the two datasets will be classified with a constant function-apporximation. It is known as covariate "shift" because the generalised data might be a sort of shifted extension to the training dataset. <b>The neural network cannot be expected to approximate the correct function with the not-so-general training dataset.</b> Input data normalisation helps tackle this issue by making sure that the inputted information is not too vastly varied, maning that the feature-map of the data is closely clustered, adn hence, easier to approximate with networks. 
+
+<img src="../uploads/cs.jpg"> 
+
+This is an inherent <b>internal</b> problem of neural networks as well. During training, assuming a neural network of 4 layers, the data that the third layer is being trained on, keeps changing as the parameters of the layers preceeding that are subjected to change with the optimization algorithm in play. It's clear that there is an internal covariate shift of training data in between the layers of the network. Just like how input data normalisation helps in reducing external covariate shift, <b>Batch Normalisation</b> helps in reducing this internal problem. The data coming from the previous layer, before being subjected to the activation function of the layer in concern, is normalised, scaled up and shifted by learnable paramaters. This makes sure that the data has a fixed mean and variance as long as the shifting and scaling parameters are not being changed. When they are, this change is gradual, and hence the network doesn't see a sudden change in data clusters, making learning a smooth and stable process. 
+
+<img src="../uploads/bn.jpg"> 
+
+The above, is done layer-wise. The two parameters of scaling and shifting are layer-specific and learnable. The data is then activated with the layer's activation function, and then fed into the next layer. The "batch" aspect comes into the picture because the above alogithm is implemented on mini-batches of the overall training data. During testing time, a weighted exponential average of the means and standard deviations is used for each layer, across all the mini-batches encountered during training along with the the learned beta and gamma paramters (for each layer, again.). This how testing data is generally noramlised. Another way is to calculate the mean and deviation for each layer for the entire data available, but this is computationally expensive for deep networks, making the latter more viable. 
+
+BatchNorm increases training speeds, allows for higher learning rates to work stably, and also provides some regularisation effect because normalisationa dds some noise to data (although this is not the primary intention). Most deep learning frameworks come with in-built BN enabling features, making it a solid training practice for practitioners. 
