@@ -3,7 +3,7 @@ layout: post
 title:  "Important techniques for Deep Learning Models"
 hero: ../uploads/gears.jpg
 overlay: red
-published: true
+published: false
 ---
 
 ## Introduction
