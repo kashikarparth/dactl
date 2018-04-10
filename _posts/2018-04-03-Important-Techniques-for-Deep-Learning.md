@@ -10,7 +10,41 @@ published: true
 
 This blogpost is meant for those who are interested in the mathematical fundamentals behind the cutting-edge implementation practices in Deep Learning. The following sections are going to be purely theoretical with little to no coding application involved directly in contrast to my previous project-based posts. The main idea is to remove the mentality of "hiding behind libraries and abstractions" as opposed to using these to aid an overall research interest, with a certain level of necessary transparency in the understanding of the inner workings of standard models.    
 
-I will be covering the mathematical approach and aiming to develop an intuitive notion among the readers regarding three different practices - Dropout, Batch Normalization and Learning Rate Calculation. I consider these to be very relevant in the recent models which gives them the edge over standard training procedures. 
+I will be covering the mathematical approach and aiming to develop an intuitive notion among the readers regarding three different practices - Learning Rate Calculation, Dropout and Batch Normalization. I consider these to be very relevant in the recent models which gives them the edge over standard training procedures.
+
+## Learning Rates
+
+In the Deep Learning community, there has been a considerable amount of debate over what is the best way to go about calculating the learning rate for a model. In the following sections we shall look into three types of learning rate manipulations that provide better convergence and are adopted as the industry approach to neural networks.
+
+First let's talk about "Learning Rate Decay". Learning Rate Decay is the formal term for the gradual reduction in learning rates as the epoch (training episode over the entire dataset) number rises. There are other implementations of learning rate decay (batch based), but epoch based LR decay is the most prominent. To understand why we would want our learning rate to decay is simple. Consider a situation where the learning rate is set to a value higher than it should be :
+
+<figure>
+<img src="../uploads/LRhigh.png">
+<figcaption>A loss vs parameter value graph. The minima is being overshot, we are not converging.</figcaption>
+</figure>
+
+Or, in a higher dimensionality, it would look like something along these lines :
+
+<figure>
+<img src="../uploads/GDLRhigh.png">
+<figcaption>The GD optimiser keeps oscillating around the minima, but never reaches it.</figcaption>
+</figure>
+
+Clearly, we need to reduce our stepping size as we proceed closer to the minima point we desire to converge to. If our learning rate is unnecessarily slow from the beginning, our learning progress will be very slow and inefficient. Hence, we decay learning rates as we increase the amount of training our network has been exposed to. All these effects are summarised in the following illustration: 
+
+<img src="../uploads/LR.png">
+
+With LR Decay, we are combining the computational advantages of high learning rates initially, and the precisional supremity of low rates for convergence eventually. There are multiple decay (or annealing) implementations. They vary from linear, cosine, step-wise and exponential annealing based on epoch number.
+
+Let's move on to more complicated annealing manipulations. Consider the following loss function:
+
+<img src="../uploads/space.png"> 
+
+There are multiple points of minima (local) in this given surface. We want to reach a minima with a broader scope of low loss, meaning that sudden dips in an otherwise high loss are minimas that we want to avoid. For this, we reduce the learning rate over a given number of epochs (cycle_len), and then <b>pop the LR back up to where it started</b>, repeating this over and over again. Sometimes, we increase the number of epochs from cycle to cycle by some factor, as training proceeds further (cycle_mult).
+
+<img src="../uploads/LRannealing.png"> 
+
+This is done to <b>pop</b> out of the narrow dips in a given loss function, as the optimiser would reach a high value in such dips after the learning rate is increased back up, and not head down the same minima again. If the optimiser reaches close to a desired broad low loss minima, popping the learning rate back up has no impact, as the optimiser would again start heading back to the same minima, which is where we want to converge to. This is an effective way of dealing with non-convex optimisation problems. 
 
 ## Dropout
 
@@ -38,7 +72,7 @@ To understand why Batch Normalisation was proposed, let's first understand the s
 
 This generates a set of "nomarlised" datapoints with a mean of 0 and standard deviation 1. The feature-space that is fed into a neural network is usually normalised (not necessarily true always, because normalisation does lead to loss of information regarding units,magnitudes etc.). The reason behind doing so is that normalisation helps in improving the stability of the optimization algorithms that the data and the weights are being exposed to. A large variation in values of a given feature, and similary between the simultaneous values of different features leads to large variations in the weights and activations between the layers of the network, which can eventually lead to learning instability because of exploding gradients and a considerably volatile loss-function in general. 
 
-Another problem faced by neural networks (even with feature data normalisation) is the problem of "Covariate Shift". This problem occurs when the network is shown and trained on a given dataset, and a more generalised form of the data is being tested on. The neural network shows less accuracy if the testing dataset is not a close representation of the training data, even if the two datasets will be classified with a constant function-apporximation. It is known as covariate "shift" because the generalised data might be a sort of shifted extension to the training dataset. <b>The neural network cannot be expected to approximate the correct function with the not-so-general training dataset.</b> Input data normalisation helps tackle this issue by making sure that the inputted information is not too vastly varied, maning that the feature-map of the data is closely clustered, adn hence, easier to approximate with networks. 
+Another problem faced by neural networks (even with feature data normalisation) is the problem of "Covariate Shift". This problem occurs when the network is shown and trained on a given dataset, and a more generalised form of the data is being tested on. The neural network shows less accuracy if the testing dataset is not a close representation of the training data, even if the two datasets will be classified with a constant function-apporximation. It is known as covariate "shift" because the generalised data might be a sort of shifted extension to the training dataset. <b>The neural network cannot be expected to approximate the correct function with the not-so-general training dataset.</b> Input data normalisation helps tackle this issue by making sure that the inputted information is not too vastly varied, maning that the feature-map of the data is closely clustered, and hence, easier to approximate with networks. 
 
 <img src="../uploads/cs.jpg"> 
 
@@ -49,26 +83,4 @@ This is an inherent <b>internal</b> problem of neural networks as well. During t
 The above, is done layer-wise. The two parameters of scaling and shifting are layer-specific and learnable. The data is then activated with the layer's activation function, and then fed into the next layer. The "batch" aspect comes into the picture because the above alogithm is implemented on mini-batches of the overall training data. During testing time, a weighted exponential average of the means and standard deviations is used for each layer, across all the mini-batches encountered during training along with the the learned beta and gamma paramters (for each layer, again.). This how testing data is generally noramlised. Another way is to calculate the mean and deviation for each layer for the entire data available, but this is computationally expensive for deep networks, making the latter more viable. 
 
 BatchNorm increases training speeds, allows for higher learning rates to work stably, and also provides some regularisation effect because normalisationa dds some noise to data (although this is not the primary intention). Most deep learning frameworks come with in-built BN enabling features, making it a solid implementation procedure for practitioners. 
-
-## Learning Rates
-
-In the Deep Learning community, there has been a considerable amount of debate over what is the best way to go about calculating the learning rate for a model. In the following sections we shall look into three types of learning rate manipulations that provide better convergence and are adopted as the industry approach to neural networks.
-
-First let's talk about "Learning Rate Decay". Learning Rate Decay is the formal term for the gradual reduction in learning rates as the epoch (training episode over the entire dataset) number rises. There are other implementations of learning rate decay (batch based), but epoch based LR decay is the most prominent. To understand why we would want our learning rate to decay is simple. Consider a situation where the learning rate is set to a value higher than it should be :
-
-<figure>
-<img src="../uploads/LRhigh.png">
-<figcaption>A loss vs parameter value graph. The minima is being overshot, we are not converging.</figcaption>
-</figure>
-
-Or, in a higher dimensionality, it would look like something along these lines :
-
-<figure>
-<img src="../uploads/GDLRhigh.png">
-<figcaption>The GD optimiser keeps oscillating around the minima, but never reaches it.</figcaption>
-</figure>
-
-Clearly, we need to reduce our stepping size as we proceed closer to the minima point we desire to converge to. If our learning rate is unnecessarily slow from the beginning, our learning progress will be very slow and inefficient. Hence, we decay learning rates as we increase the amount of training our network has been exposed to.
-All these effects are summarised in the following illustration: 
-
-<img src="../uploads/LR.png">
+ 
