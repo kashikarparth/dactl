@@ -10,7 +10,7 @@ published: true
 
 This blogpost is meant for those who are interested in the mathematical fundamentals behind the cutting-edge implementation practices in Deep Learning. The following sections are going to be purely theoretical with little to no coding application involved directly in contrast to my previous project-based posts. The main idea is to remove the mentality of "hiding behind libraries and abstractions" as opposed to using these to aid an overall research interest, with a certain level of necessary transparency in the understanding of the inner workings of standard models.    
 
-I will be covering the mathematical approach and aiming to develop an intuitive notion among the readers regarding three different practices - Dropout, Batch Normalization, Data Augmentation (both training and testing data) and finding the right learning rates (a considerably under-researched topic in Deep Learning). I consider these to be very relevant in the recent models which gives them the edge over standard training procedures. 
+I will be covering the mathematical approach and aiming to develop an intuitive notion among the readers regarding three different practices - Dropout, Batch Normalization and Learning Rate Calculation. I consider these to be very relevant in the recent models which gives them the edge over standard training procedures. 
 
 ## Dropout
 
@@ -48,4 +48,27 @@ This is an inherent <b>internal</b> problem of neural networks as well. During t
 
 The above, is done layer-wise. The two parameters of scaling and shifting are layer-specific and learnable. The data is then activated with the layer's activation function, and then fed into the next layer. The "batch" aspect comes into the picture because the above alogithm is implemented on mini-batches of the overall training data. During testing time, a weighted exponential average of the means and standard deviations is used for each layer, across all the mini-batches encountered during training along with the the learned beta and gamma paramters (for each layer, again.). This how testing data is generally noramlised. Another way is to calculate the mean and deviation for each layer for the entire data available, but this is computationally expensive for deep networks, making the latter more viable. 
 
-BatchNorm increases training speeds, allows for higher learning rates to work stably, and also provides some regularisation effect because normalisationa dds some noise to data (although this is not the primary intention). Most deep learning frameworks come with in-built BN enabling features, making it a solid training practice for practitioners. 
+BatchNorm increases training speeds, allows for higher learning rates to work stably, and also provides some regularisation effect because normalisationa dds some noise to data (although this is not the primary intention). Most deep learning frameworks come with in-built BN enabling features, making it a solid implementation procedure for practitioners. 
+
+## Learning Rates
+
+In the Deep Learning community, there has been a considerable amount of debate over what is the best way to go about calculating the learning rate for a model. In the following sections we shall look into three types of learning rate manipulations that provide better convergence and are adopted as the industry approach to neural networks.
+
+First let's talk about "Learning Rate Decay". Learning Rate Decay is the formal term for the gradual reduction in learning rates as the epoch (training episode over the entire dataset) number rises. There are other implementations of learning rate decay (batch based), but epoch based LR decay is the most prominent. To understand why we would want our learning rate to decay is simple. Consider a situation where the learning rate is set to a value higher than it should be :
+
+<figure>
+<img src="../uploads/LRhigh.png">
+<figcaption>A loss vs parameter value graph. The minima is being overshot, we are not converging.</figcaption>
+</figure>
+
+Or, in a higher dimensionality, it would look like something along these lines :
+
+<figure>
+<img src="../uploads/GDLRhigh.png">
+<figcaption>The GD optimiser keeps oscillating around the minima, but never reaches it.</figcaption>
+</figure>
+
+Clearly, we need to reduce our stepping size as we proceed closer to the minima point we desire to converge to. If our learning rate is unnecessarily slow from the beginning, our learning progress will be very slow and inefficient. Hence, we decay learning rates as we increase the amount of training our network has been exposed to.
+All these effects are summarised in the following illustration: 
+
+<img src="../uploads/LR.png">
