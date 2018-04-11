@@ -48,7 +48,9 @@ This is done to <b>pop</b> out of the narrow dips in a given loss function, as t
 
 <img src="../uploads/LRex.png"> 
 
-The maximum learning rate calculation is fairly simple. We take a random starting point (weights initialisation) and apply learning rates starting from 0, recording the loss. Wherever we find the <b>rate</b> of decrease in loss to be the highest, we approximate that to be the learning rate cap for annealing with cycles. The same procedure is applicable to simple LR decay's starting rates as well.   
+The maximum learning rate calculation is fairly simple. We take a random starting point (weights initialisation) and apply learning rates starting from 0, recording the loss. Wherever we find the <b>rate</b> of decrease in loss to be the highest, we approximate that to be the learning rate cap for annealing with cycles. The same procedure is applicable to simple LR decay's starting rates as well. 
+
+There are other learning rate optimisations includeing layer-wise optimisations, and adaptive rates for each conncetion in a network, but these are too nuanced, and follow the same fundamental <b>principles</b> that I have explained in this post. That's about it for learning rates!   
 
 ## Dropout
 
@@ -87,4 +89,18 @@ This is an inherent <b>internal</b> problem of neural networks as well. During t
 The above, is done layer-wise. The two parameters of scaling and shifting are layer-specific and learnable. The data is then activated with the layer's activation function, and then fed into the next layer. The "batch" aspect comes into the picture because the above alogithm is implemented on mini-batches of the overall training data. During testing time, a weighted exponential average of the means and standard deviations is used for each layer, across all the mini-batches encountered during training along with the the learned beta and gamma paramters (for each layer, again.). This how testing data is generally noramlised. Another way is to calculate the mean and deviation for each layer for the entire data available, but this is computationally expensive for deep networks, making the latter more viable. 
 
 BatchNorm increases training speeds, allows for higher learning rates to work stably, and also provides some regularisation effect because normalisationa dds some noise to data (although this is not the primary intention). Most deep learning frameworks come with in-built BN enabling features, making it a solid implementation procedure for practitioners. 
- 
+
+## References and Suggested Reads
+<a href = "http://forums.fast.ai/t/deeplearning-lecnotes2/7515">Fast.ai lesson notes (great content)</a>
+<a href = "https://arxiv.org/pdf/1506.01186.pdf">Cyclic Learning Rates Paper</a>
+<a href = "https://www.youtube.com/watch?v=QzulmoOg2JE">Andrew Ng's lesson on LR Decay</a> 
+<a href = "https://arxiv.org/pdf/1206.1106.pdf">No More Pesky Learning Rates (Paper)</a>
+<a href = "https://www.kdnuggets.com/2017/11/estimating-optimal-learning-rate-deep-neural-network.html">Loss vs. Rates</a>
+<a href = "https://www.youtube.com/watch?v=dXB-KQYkzNU">Batch Norm basics explained</a>
+<a href = "https://arxiv.org/abs/1502.03167">The original BatchNorm paper</a>
+<a href = "https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82">Jaron Collin's on BatchNorm</a>
+<a href = "https://www.youtube.com/watch?v=nUUqwaxLnWs">Andrew Ng's lesson on BatchNorm</a> 
+<a href = "https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5">Very nice intuition for Dropout</a>
+<a href = "https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/">Jason Brownlee's Blogpost</a>
+<a href = "https://www.youtube.com/watch?v=ARq74QuavAo">Andrew Ng's lesson on Dropout</a>
+<a href = "https://www.youtube.com/watch?v=UcKPdAM8cnI">Hugo Larochelle's Dropout Lesson</a>
