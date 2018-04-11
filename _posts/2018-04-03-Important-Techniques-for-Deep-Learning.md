@@ -91,16 +91,16 @@ The above, is done layer-wise. The two parameters of scaling and shifting are la
 BatchNorm increases training speeds, allows for higher learning rates to work stably, and also provides some regularisation effect because normalisationa dds some noise to data (although this is not the primary intention). Most deep learning frameworks come with in-built BN enabling features, making it a solid implementation procedure for practitioners. 
 
 ## References and Suggested Reads
-<a href = "http://forums.fast.ai/t/deeplearning-lecnotes2/7515">Fast.ai lesson notes (great content)</a>
-<a href = "https://arxiv.org/pdf/1506.01186.pdf">Cyclic Learning Rates Paper</a>
-<a href = "https://www.youtube.com/watch?v=QzulmoOg2JE">Andrew Ng's lesson on LR Decay</a> 
-<a href = "https://arxiv.org/pdf/1206.1106.pdf">No More Pesky Learning Rates (Paper)</a>
-<a href = "https://www.kdnuggets.com/2017/11/estimating-optimal-learning-rate-deep-neural-network.html">Loss vs. Rates</a>
-<a href = "https://www.youtube.com/watch?v=dXB-KQYkzNU">Batch Norm basics explained</a>
-<a href = "https://arxiv.org/abs/1502.03167">The original BatchNorm paper</a>
-<a href = "https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82">Jaron Collin's on BatchNorm</a>
-<a href = "https://www.youtube.com/watch?v=nUUqwaxLnWs">Andrew Ng's lesson on BatchNorm</a> 
-<a href = "https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5">Very nice intuition for Dropout</a>
-<a href = "https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/">Jason Brownlee's Blogpost</a>
-<a href = "https://www.youtube.com/watch?v=ARq74QuavAo">Andrew Ng's lesson on Dropout</a>
-<a href = "https://www.youtube.com/watch?v=UcKPdAM8cnI">Hugo Larochelle's Dropout Lesson</a>
+<a href = "http://forums.fast.ai/t/deeplearning-lecnotes2/7515">http://forums.fast.ai/t/deeplearning-lecnotes2/7515</a> - Fast.ai lesson notes (great content)
+<a href = "https://arxiv.org/pdf/1506.01186.pdf">https://arxiv.org/pdf/1506.01186.pdf</a> - Cyclic Learning Rates Paper
+<a href = "https://www.youtube.com/watch?v=QzulmoOg2JE">https://www.youtube.com/watch?v=QzulmoOg2JE</a> - Andrew Ng's lesson on LR Decay
+<a href = "https://arxiv.org/pdf/1206.1106.pdf">https://arxiv.org/pdf/1206.1106.pdf</a> - No More Pesky Learning Rates (Paper)
+<a href = "https://www.kdnuggets.com/2017/11/estimating-optimal-learning-rate-deep-neural-network.html">https://www.kdnuggets.com/2017/11/estimating-optimal-learning-rate-deep-neural-network.html</a> - Loss vs. Rates
+<a href = "https://www.youtube.com/watch?v=dXB-KQYkzNU">https://www.youtube.com/watch?v=dXB-KQYkzNU</a> - Batch Norm basics explained
+<a href = "https://arxiv.org/abs/1502.03167">https://arxiv.org/abs/1502.03167</a> - The original BatchNorm paper
+<a href = "https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82">https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82</a> - Jaron Collin's on BatchNorm
+<a href = "https://www.youtube.com/watch?v=nUUqwaxLnWs">https://www.youtube.com/watch?v=nUUqwaxLnWs</a> - Andrew Ng's lesson on BatchNorm
+<a href = "https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5">https://medium.com/@amarbudhiraja/https-medium-com-amarbudhiraja-learning-less-to-learn-better-dropout-in-deep-machine-learning-74334da4bfc5</a> - Very nice intuition for Dropout
+<a href = "https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/">https://machinelearningmastery.com/dropout-regularization-deep-learning-models-keras/</a> - Jason Brownlee's Blogpost
+<a href = "https://www.youtube.com/watch?v=ARq74QuavAo">https://www.youtube.com/watch?v=ARq74QuavAo</a> - Andrew Ng's lesson on Dropout
+<a href = "https://www.youtube.com/watch?v=UcKPdAM8cnI">https://www.youtube.com/watch?v=UcKPdAM8cnI</a> - Hugo Larochelle's Dropout Lesson
