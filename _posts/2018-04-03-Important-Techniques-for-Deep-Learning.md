@@ -44,7 +44,11 @@ There are multiple points of minima (local) in this given surface. We want to re
 
 <img src="../uploads/LRannealing.png"> 
 
-This is done to <b>pop</b> out of the narrow dips in a given loss function, as the optimiser would reach a high value in such dips after the learning rate is increased back up, and not head down the same minima again. If the optimiser reaches close to a desired broad low loss minima, popping the learning rate back up has no impact, as the optimiser would again start heading back to the same minima, which is where we want to converge to. This is an effective way of dealing with non-convex optimisation problems. 
+This is done to <b>pop</b> out of the narrow dips in a given loss function, as the optimiser would reach a high value in such dips after the learning rate is increased back up, and not head down the same minima again. If the optimiser reaches close to a desired broad low loss minima, popping the learning rate back up has no impact, as the optimiser would again start heading back to the same minima (similar to osciallting around a minima with large learning rate), which is where we want to converge to. Eventually, as the learning rate decays for the final time, we would arrive at the desired convergence point. This is an effective way of dealing with non-convex optimisation problems. 
+
+<img src="../uploads/LRex.png"> 
+
+The maximum learning rate calculation is fairly simple. We take a random starting point (weights initialisation) and apply learning rates starting from 0, recording the loss. Wherever we find the <b>rate</b> of decrease in loss to be the highest, we approximate that to be the learning rate cap for annealing with cycles. The same procedure is applicable to simple LR decay's starting rates as well.   
 
 ## Dropout
 
