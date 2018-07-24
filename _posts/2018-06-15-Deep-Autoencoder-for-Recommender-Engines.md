@@ -17,7 +17,7 @@ In Deep Learning, Autoencoders are a set of neural networks that are used to gen
 
 Lets discuss every part in the above represenation briefly (with the assumption that the autoencoder is trained):
 
-Encoder : This part of the autoencoder comes up with a lower dimension representation for the input data, meaningful in some way, with the dimension equal to the number of nodes in the code layer, to be precise. Let's call that function f(x).
+<b>Encoder</b> : This part of the autoencoder comes up with a lower dimension representation for the input data, meaningful in some way, with the dimension equal to the number of nodes in the code layer, to be precise. Let's call that function f(x).
 
 Code : This layer of the autoencoder is the one with the lowest dimension representation of the input data, and contains only the salient features of the data which lead to learning, while cutting away unnecessary patters in the training data, as it's dimensions are forced to be smaller than that of the data itself.
 
