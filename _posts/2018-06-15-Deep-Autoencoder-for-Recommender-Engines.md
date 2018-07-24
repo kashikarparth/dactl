@@ -47,8 +47,11 @@ A new addition to forward and backward passes on batches of the training data is
 One of the details mentioned above is that the coded dimension is smaller than the input itself. This is only true for an "Underfit Autoencoder". There are "Overfit Autoencoder", which are exactly opposite. Here, the network isn't forced to compress the data and still be able to keep it meaningful, hence the learning occurs from regularization practices. The following are the overviews of the major regularization practices when it comes to training these kind of networks:
 
 Sparse Penalty : In a 'sparse autoencoder', there is a sparsity penalty applied to the code layer, in addition to the reconstruction error. 
+
 Denoizing Autoencoders : In such a regularization, the autoencoder is fed corrupted input, and the reconstruction loss is based on the pure input and autoencoder output Euclidean distance (or some other measure of similarity)
+
 Penalizing Derivatives : Another strategy for regularizing an autoencoder is to use a penalty as in sparse autoencoders, but the penalty is based on the magnitude of the gradient vector of the code layer with respect to the input vector. This forces the code layer to become less sensitive to changes in the input, forcing the autoencoder to learn more generalized features.
+
 Dropout : In the NVIDIA model, a dropout regularization has been applied to the code layer, making the decoder more generalized to the data it deals with, although dropout regularization seems to relatively uncommon is general practices regarding autoencoders. Thocae amount of dropout, and its ltion of application have both been experimentally determined. 
 
 ## The NVIDIA model
@@ -73,9 +76,9 @@ b) Boundless positive part
 
 This rule is dataset specific, and is mostly proven by experiment. The function chosen by NVIDIA researches is the SELU function : 
 
-<img src="../uploads/selu.png"> 
+<figure><img src="../uploads/selu.png"><figcaption style = "color: black;">The activation function</figcaption> </figure>
 
-<img src="../uploads/selug.jpg">
+<figure><img src="../uploads/selug.jpg"><figcaption style="color: black;">The plot of the activation function</figcaption></figure>
 
 ### Effect of the layer depth : 
 In general cases network depth has considerable benfits in Autoencoders. In single layer autoencoders, the mapping from the input to the code is shallow, preventing us from using a lot of constraints such as the sparsity penalty very effectively. A deep autoencoder, with at least one additional hidden layer inside the encoder itself, can approximate any mapping from input to code arbitrarily well, given enough hidden units. Depth can exponentially reduce the computational cost of representing some functions. Depth can also exponentially decrease the amount of training data needed to learn some functions. Experimentally, deep autoencoders yield much better compression than corresponding shallow or linear autoencoders.
@@ -108,9 +111,10 @@ TensorRT produces inferences at a considerably higher throughput (much lower lat
 
 The following is the cost function during training. There are jumps, and not a constant descent due to the "data-refeeding" mechanism that I mentioned earlier. 
 
-<img src="../uploads/Loss.PNG"> 
+<figure><img src="../uploads/Loss.PNG"> <figcaption style="color: black;">Pre Hyperparameter Optimization</figcaption></figure>
 
-<img src="../uploads/loss2.PNG">
+<figure><img src="../uploads/loss2.PNG"><figcaption style="color: black;">Post Hyperparameter Optimization</figcaption></figure>
+
 
 
 
