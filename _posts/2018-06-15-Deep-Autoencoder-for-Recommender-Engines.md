@@ -11,7 +11,7 @@ published: true
 
 In Deep Learning, Autoencoders are a set of neural networks that are used to generate the value of the input, as their trained output. The following is a typical representation of an Autoencoder (Underfit Autoencoder) :
 
-<img src="../uploads/auto.jpg"> 
+<img src="../uploads/auto.png"> 
 
 ### Breakdown
 
