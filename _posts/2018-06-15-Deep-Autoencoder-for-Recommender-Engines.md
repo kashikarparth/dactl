@@ -17,11 +17,11 @@ In Deep Learning, Autoencoders are a set of neural networks that are used to gen
 
 Lets discuss every part in the above represenation briefly (with the assumption that the autoencoder is trained):
 
-<b>Encoder</b> : This part of the autoencoder comes up with a lower dimension representation for the input data, meaningful in some way, with the dimension equal to the number of nodes in the code layer, to be precise. Let's call that function f(x).
+<strong>Encoder</strong> : This part of the autoencoder comes up with a lower dimension representation for the input data, meaningful in some way, with the dimension equal to the number of nodes in the code layer, to be precise. Let's call that function f(x).
 
-Code : This layer of the autoencoder is the one with the lowest dimension representation of the input data, and contains only the salient features of the data which lead to learning, while cutting away unnecessary patters in the training data, as it's dimensions are forced to be smaller than that of the data itself.
+<strong>Code</strong> : This layer of the autoencoder is the one with the lowest dimension representation of the input data, and contains only the salient features of the data which lead to learning, while cutting away unnecessary patters in the training data, as it's dimensions are forced to be smaller than that of the data itself.
 
-Decoder : This part of the autoencoder generates the input data back up from the code layer into the dimensions of the input data itself, basically understanding the meaning of the coded representation. It learns from the coded representations and comes up with the generating function g(x), where g(f(input)) = input = output (perfectly trained).
+<strong>Decoder</strong> : This part of the autoencoder generates the input data back up from the code layer into the dimensions of the input data itself, basically understanding the meaning of the coded representation. It learns from the coded representations and comes up with the generating function g(x), where g(f(input)) = input = output (perfectly trained).
 
 ### Intuition
 
@@ -46,20 +46,17 @@ A new addition to forward and backward passes on batches of the training data is
 
 One of the details mentioned above is that the coded dimension is smaller than the input itself. This is only true for an "Underfit Autoencoder". There are "Overfit Autoencoder", which are exactly opposite. Here, the network isn't forced to compress the data and still be able to keep it meaningful, hence the learning occurs from regularization practices. The following are the overviews of the major regularization practices when it comes to training these kind of networks:
 
-Sparse Penalty : In a 'sparse autoencoder', there is a sparsity penalty applied to the code layer, in addition to the reconstruction error. 
+<strong>Sparse Penalty</strong> : In a 'sparse autoencoder', there is a sparsity penalty applied to the code layer, in addition to the reconstruction error. 
 
-Denoizing Autoencoders : In such a regularization, the autoencoder is fed corrupted input, and the reconstruction loss is based on the pure input and autoencoder output Euclidean distance (or some other measure of similarity)
+<strong>Denoizing Autoencoders</strong> : In such a regularization, the autoencoder is fed corrupted input, and the reconstruction loss is based on the pure input and autoencoder output Euclidean distance (or some other measure of similarity)
 
-Penalizing Derivatives : Another strategy for regularizing an autoencoder is to use a penalty as in sparse autoencoders, but the penalty is based on the magnitude of the gradient vector of the code layer with respect to the input vector. This forces the code layer to become less sensitive to changes in the input, forcing the autoencoder to learn more generalized features.
+<strong>Penalizing Derivatives</strong> : Another strategy for regularizing an autoencoder is to use a penalty as in sparse autoencoders, but the penalty is based on the magnitude of the gradient vector of the code layer with respect to the input vector. This forces the code layer to become less sensitive to changes in the input, forcing the autoencoder to learn more generalized features.
 
-Dropout : In the NVIDIA model, a dropout regularization has been applied to the code layer, making the decoder more generalized to the data it deals with, although dropout regularization seems to relatively uncommon is general practices regarding autoencoders. Thocae amount of dropout, and its ltion of application have both been experimentally determined. 
+<strong>Dropout</strong> : In the NVIDIA model, a dropout regularization has been applied to the code layer, making the decoder more generalized to the data it deals with, although dropout regularization seems to relatively uncommon is general practices regarding autoencoders. Thocae amount of dropout, and its ltion of application have both been experimentally determined. 
 
 ## The NVIDIA model
 
 The NVIDIA dataset is [] in dimensions, with ratings for each user for each movie over (1998-2016). The proposed autoencoder is meant to generate recommendations for the users on the basis of their previous movie ratings. This kind of filtering is popularly reffered to as collaborative fltering, and is different from content based filtering where the algorithm understands the content preferance of the user. Collaborative filtering works on the simple assumption that users with a similar taste in movies will tend to have high ratings for similar movies.
-
-The proposed model is as follows :
-//model.png
 
 The model takes in a sparse input with the known ratings of each user for every movie (0 if not rated), creates a dense code of the input, and outputs a dense matrix of the same dimensions as the input, with predicted ratings of the user.
 
@@ -85,8 +82,7 @@ In general cases network depth has considerable benfits in Autoencoders. In sing
 
 One point to note here is that in many autoencoders, the encoder and decoder are made to be mirror images of each other. This enables us to constrict he weight matrices of the encoder to be the transpose of the weight matrices of the decoder (as that would be the property of the perfect solution in such a case, the math is elementary but I urge the reader to work it out for a simple case of 2 layers each), and the same applies to gradients, halving the effective trainable parameters. (This is also known as 'weight-linking' or 'tying weights'). 
 
-The NVIDIA paper states that the RMSE of the test data reduced with increasing depths of 128 hidden units each but this reduction slowed down eventually. Upon using scikit-optimize (a library for hyperparamter tuning), for 40 epochs of training, I arrived at the best depth of 9 layers of 212 units each, but then manually tweaked around a little to arrive at the final model :
-//model2.jpg
+The NVIDIA paper states that the RMSE of the test data reduced with increasing depths of 128 hidden units each but this reduction slowed down eventually. Upon using scikit-optimize (a library for hyperparamter tuning), for 40 epochs of training, I arrived at the best depth of 9 layers of 212 units each, but then manually tweaked around a little to arrive at the final model.
 
 ## TensorRT 
 
@@ -94,15 +90,15 @@ Inferencing is typically a nasty step amongst the list of computationally expens
 
 NVIDIA recently launched their inferencing optimization package 'TensorRT' for GPU-based computations. Once the neural network is trained, TensorRT enables the network to be compressed, optimized and deployed as a runtime without the overhead of a framework.The following are some of it's key features : 
 
-Layer and tensor fusion and elimination of unused layers: TensorRT parses the network computational graph and looks for opportunities to perform graph optimizations. These graph optimizations do not change the underlying computation in the graph: instead, they look to restructure the graph to perform the operations much faster and more efficiently.
+<strong>Layer and tensor fusion and elimination of unused layers</strong> : TensorRT parses the network computational graph and looks for opportunities to perform graph optimizations. These graph optimizations do not change the underlying computation in the graph: instead, they look to restructure the graph to perform the operations much faster and more efficiently.
 
-FP16 and INT8 reduced precision calibration: Most deep learning frameworks train neural networks in full 32-bit precision (FP32). Once the model is fully trained, inference computations can use half precision FP16 or even INT8 tensor operations, since gradient backpropagation is not required for inference. Using lower precision results in smaller model size, lower memory utilization and latency, and higher throughput.
+<strong>FP16 and INT8 reduced precision calibration</strong> : Most deep learning frameworks train neural networks in full 32-bit precision (FP32). Once the model is fully trained, inference computations can use half precision FP16 or even INT8 tensor operations, since gradient backpropagation is not required for inference. Using lower precision results in smaller model size, lower memory utilization and latency, and higher throughput.
 
-Target-specific autotuning: During the optimization phase TensorRT also chooses from hundreds of specialized kernels, many of them hand-tuned and optimized for a range of parameters and target platforms. As an example, there are several different algorithms to do convolutions. TensorRT will pick the implementation from a library of kernels that delivers the best performance for the target GPU, input data size, filter size, tensor layout, batch size and other parameters.
+<strong>Target-specific autotuning </strong>: During the optimization phase TensorRT also chooses from hundreds of specialized kernels, many of them hand-tuned and optimized for a range of parameters and target platforms. As an example, there are several different algorithms to do convolutions. TensorRT will pick the implementation from a library of kernels that delivers the best performance for the target GPU, input data size, filter size, tensor layout, batch size and other parameters.
 
-Efficient memory reuse (especially effective with Volta Architecture of GPUs): TensorRT also reduces memory footprint and improves memory reuse by designating memory for each tensor only for the duration of its usage, avoiding memory allocation overhead for fast and efficient execution. This is especially effective with the "TensorCore" architecture of the recent Volta GPUs.
+<strong>Efficient memory reuse (especially effective with Volta Architecture of GPUs)</strong> : TensorRT also reduces memory footprint and improves memory reuse by designating memory for each tensor only for the duration of its usage, avoiding memory allocation overhead for fast and efficient execution. This is especially effective with the "TensorCore" architecture of the recent Volta GPUs.
 
-TensorFlow Support: TensorFlow models can be directly ingested, optimized and deployed with up to 18x faster performance compared to TensorFlow framework inference on Tesla V100.
+<strong>TensorFlow Support</strong> : TensorFlow models can be directly ingested, optimized and deployed with up to 18x faster performance compared to TensorFlow framework inference on Tesla V100.
 
 TensorRT produces inferences at a considerably higher throughput (much lower latency), and also is efficient in terms of power requirements. I've used TensorRT models when load-testing the model to be deployed to production.
 
@@ -115,9 +111,9 @@ The following is the cost function during training. There are jumps, and not a c
 
 <figure><img src="../uploads/loss2.PNG"><figcaption style="color: black;">Post Hyperparameter Optimization</figcaption></figure>
 
+The following is a comparision table with other ML Algorithms implmented after similar training epochs on a large and a small dataset, highlighting the ability of Deep Learning to outperform Machine Learning models given enough data. 
 
-
-
+<img src="../uploads/table.PNG">
 
 
 
