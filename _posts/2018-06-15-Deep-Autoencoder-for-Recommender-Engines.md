@@ -119,13 +119,9 @@ The following is a comparision table with other ML Algorithms implmented after s
 
 There's a lot more to Autoencoders than I have been able to cover in this blogpost, include Variational Autoencoders and their use cases. The following sources should help in establishing a solid grasp in understand such nuances and advancements. 
 
-<a href = "https://github.com/NVIDIA/DeepRecommender">https://github.com/NVIDIA/DeepRecommender</a> - NVIDIA PyTorch Repository for the same.
-
-<a href = "https://arxiv.org/abs/1708.01715">https://arxiv.org/abs/1708.01715</a> - NVIDIA DeepRecommender Paper on the Netflix Dataset
-
-<a href = "http://www.deeplearningbook.org/">http://www.deeplearningbook.org/</a> - Deep Learning Book - MIT
-
-<a href = "https://arxiv.org/pdf/1312.6114.pdf">https://arxiv.org/pdf/1312.6114.pdf</a> - The original paper on Auto-Encoding Variational Bayes
-
+<a href = "https://github.com/NVIDIA/DeepRecommender">https://github.com/NVIDIA/DeepRecommender</a> - NVIDIA PyTorch Repository for the same. <br>
+<a href = "https://arxiv.org/abs/1708.01715">https://arxiv.org/abs/1708.01715</a> - NVIDIA DeepRecommender Paper on the Netflix Dataset <br>
+<a href = "http://www.deeplearningbook.org/">http://www.deeplearningbook.org/</a> - Deep Learning Book - MIT<br>
+<a href = "https://arxiv.org/pdf/1312.6114.pdf">https://arxiv.org/pdf/1312.6114.pdf</a> - The original paper on Auto-Encoding Variational Bayes<br>
 <a href = "https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf">https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf</a> - A really nice post on Variational Autoencoders
 
