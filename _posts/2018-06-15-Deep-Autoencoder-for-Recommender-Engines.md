@@ -106,9 +106,9 @@ TensorRT produces inferences at a considerably higher throughput (much lower lat
 
 The following is the cost function during training. There are jumps, and not a constant descent due to the "data-refeeding" mechanism that I mentioned earlier. 
 
-<img src="../uploads/Loss.png"> 
+<img src="../uploads/Loss.PNG"> 
 
-<img src="../uploads/loss2.png">
+<img src="../uploads/loss2.PNG">
 
 
 
