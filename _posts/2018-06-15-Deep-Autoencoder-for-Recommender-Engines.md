@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Recommendation System with Deep Autoencoders"
-hero: ../uploads/rnn.jpg
+hero: ../uploads/auto.png
 overlay: blue
 published: true
 
@@ -25,9 +25,7 @@ Lets discuss every part in the above represenation briefly (with the assumption 
 
 ### Intuition
 
-So what's really happening is that the encoder part of the network is going to come up with a composite (if multiple layers) function to map the input to a lower dimension space, and then the decoder is trying to come up with a function to do the exact opposite. Given the structures of each, their dimensionalities need not necessarily be equal, hence we cant necessarily call the wight matrices as the inverse of the other, even though g(f(x)) = x, as their composite dimensions could be entirely distinct from one another. 
-
-Every technique implemented on autoencoders, from activation functions to network depth as well as reguarizations are to help in the encoder extracting the meaningful information from the data into the autoencoder code layer. This overall guideline has proven to be quite helpful in predicting the positive and negative impacts of constraints applied onto the network. Batch_Norm for example, applied in the middle of the encoder or decode, leads to a very high loss, and very little training, as the network now has to come up with functions that deal with a normalization (that too a batchwise normalization) of its input.
+So what's really happening is that the encoder part of the network is going to come up with a composite (if multiple layers) function to map the input to a lower dimension space, and then the decoder is trying to come up with a function to do the exact opposite. Given the structures of each, their dimensionalities need not necessarily be equal, hence we cant necessarily call the wight matrices as the inverse of the other, even though g(f(x)) = x, as their composite dimensions could be entirely distinct from one another. Every technique implemented on autoencoders, from activation functions to network depth as well as reguarizations are to help in the encoder extracting the meaningful information from the data into the autoencoder code layer. This overall guideline has proven to be quite helpful in predicting the positive and negative impacts of constraints applied onto the network. Batch_Norm for example, applied in the middle of the encoder or decode, leads to a very high loss, and very little training, as the network now has to come up with functions that deal with a normalization (that too a batchwise normalization) of its input.
 
 Basically, we're trying to extract the meaning features to represt data in a low dimension space than its initial representation. Following is an example of MNIST being used with a Deep Autoencoders, and setting the code dimension as 2 :
 
@@ -121,9 +119,9 @@ The following is a comparision table with other ML Algorithms implmented after s
 
 There's a lot more to Autoencoders than I have been able to cover in this blogpost, include Variational Autoencoders and their use cases. The following sources should help in establishing a solid grasp in understand such nuances and advancements. 
 
-<a href = "https://github.com/NVIDIA/DeepRecommender">https://github.com/NVIDIA/DeepRecommender</a> - NVIDIA PyTorch Repository for the same. <br>
-<a href = "https://arxiv.org/abs/1708.01715">https://arxiv.org/abs/1708.01715</a> - NVIDIA DeepRecommender Paper on the Netflix Dataset <br>
-<a href = "http://www.deeplearningbook.org/">http://www.deeplearningbook.org/</a> - Deep Learning Book - MIT<br>
-<a href = "https://arxiv.org/pdf/1312.6114.pdf">https://arxiv.org/pdf/1312.6114.pdf</a> - The original paper on Auto-Encoding Variational Bayes<br>
+<a href = "https://github.com/NVIDIA/DeepRecommender">https://github.com/NVIDIA/DeepRecommender</a> - NVIDIA PyTorch Repository for the same.
+<a href = "https://arxiv.org/abs/1708.01715">https://arxiv.org/abs/1708.01715</a> - NVIDIA DeepRecommender Paper on the Netflix Dataset
+<a href = "http://www.deeplearningbook.org/">http://www.deeplearningbook.org/</a> - Deep Learning Book - MIT
+<a href = "https://arxiv.org/pdf/1312.6114.pdf">https://arxiv.org/pdf/1312.6114.pdf</a> - The original paper on Auto-Encoding Variational Bayes
 <a href = "https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf">https://towardsdatascience.com/intuitively-understanding-variational-autoencoders-1bfe67eb5daf</a> - A really nice post on Variational Autoencoders
 
