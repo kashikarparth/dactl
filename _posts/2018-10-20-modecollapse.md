@@ -123,4 +123,14 @@ The following studies are worth looking into :
 
 ## References 
 
-
+<ul>
+<li><a href = "https://arxiv.org/pdf/1406.2661.pdf">https://arxiv.org/pdf/1406.2661.pdf</a></li>
+<li><a href = "https://github.com/uclaacmai/Generative-Adversarial-Network-Tutorial/blob/master/Generative%20Adversarial%20Networks%20Tutorial.ipynb">https://github.com/uclaacmai/Generative-Adversarial-Network-Tutorial/blob/master/Generative%20Adversarial%20Networks%20Tutorial.ipynb</a></li>
+<li><a href = "https://cs.stanford.edu/people/karpathy/gan/">https://cs.stanford.edu/people/karpathy/gan/</a></li>
+<li><a href = "https://medium.com/@jonathan_hui/gan-unrolled-gan-how-to-reduce-mode-collapse-af5f2f7b51cd">https://medium.com/@jonathan_hui/gan-unrolled-gan-how-to-reduce-mode-collapse-af5f2f7b51cd</a></li>
+<li><a href = "https://arxiv.org/pdf/1804.04391.pdf">https://arxiv.org/pdf/1804.04391.pdf</a></li>
+<li><a href = "https://www.exptechinc.com/machine-learning/fighting-gan-mode-collapse-by-randomly-sampling-the-latent-space/">https://www.exptechinc.com/machine-learning/fighting-gan-mode-collapse-by-randomly-sampling-the-latent-space/</a></li>
+<li><a href = "https://www.youtube.com/watch?v=ktxhiKhWoEE">https://www.youtube.com/watch?v=ktxhiKhWoEE</a></li>
+<li><a href = "https://arxiv.org/pdf/1411.1784.pdf">https://arxiv.org/pdf/1411.1784.pdf</a></li>
+<li><a href = "https://openreview.net/pdf?id=HJxyAjRcFX">https://openreview.net/pdf?id=HJxyAjRcFX</a></li>
+</ul>
