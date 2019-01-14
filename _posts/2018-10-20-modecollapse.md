@@ -2,8 +2,8 @@
 
 layout: post
 title:  "Fixing Mode Collapse in GANs using Guided Latent Spaces"
-hero: ../uploads/model1.png
-overlay: red
+hero: ../uploads/generator_loss.PNG
+overlay: orange
 published: true
 
 ---
@@ -49,11 +49,9 @@ The Generator Network (after training) is basically a mapping from a "latent spa
 
 The fact that meaningful features have been encoded into the various directions/regions of the latent space can be showing by doing arithmetic on the latent space representations of known data points as mapped by a trained function approximator :
 
-//arithmetic latent space
+<img src="../uploads/t-sne.png"> 
 
 This is a similarity between Autoencoders and GANs. For Autoencoders, the Encoder is forced to extract meaningful information from an input data point, and encode the point into its latent space, for the Decoder to eventually decode back into the real space. In GANs, the Generator Network is forced to attribute regions in it's input latent space to meaningful features of the real data distribution to which it maps out random inputs points to, for convergence of generating real-seeming data points (fooling the Discriminator).
-
-//Generator latent space depiction
 
 A fairly important point to be noted here is that the mapping from the "latent space" to the "real space" is many to one, implying that multiple points in the former can lead to the same result in the latter.
 
