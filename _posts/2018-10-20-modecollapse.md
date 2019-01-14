@@ -49,7 +49,7 @@ The Generator Network (after training) is basically a mapping from a "latent spa
 
 The fact that meaningful features have been encoded into the various directions/regions of the latent space can be showing by doing arithmetic on the latent space representations of known data points as mapped by a trained function approximator :
 
-<img src="../uploads/t-sne.png"> 
+<img src="../uploads/GAN_arithmetic.PNG"> 
 
 This is a similarity between Autoencoders and GANs. For Autoencoders, the Encoder is forced to extract meaningful information from an input data point, and encode the point into its latent space, for the Decoder to eventually decode back into the real space. In GANs, the Generator Network is forced to attribute regions in it's input latent space to meaningful features of the real data distribution to which it maps out random inputs points to, for convergence of generating real-seeming data points (fooling the Discriminator).
 
