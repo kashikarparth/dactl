@@ -109,7 +109,9 @@ The following shows the intended mapping for the Generator from the latent space
 
 ## Results 
 
-Coming soon.
+<img src="../uploads/gan_results.jpg"> 
+
+As seen, the training is progressive towards mode retention, and variability within the modes. The "further possibilities" section can give some insights into how to improve the current model that I propose, and will be the key focus of my future work in this field.
 
 ## Further possibilities 
 
@@ -117,7 +119,7 @@ The following studies are worth looking into :
 <ul>
 <li><b>The penalizing factor from the classifier</b></li>  - The loss function is based on the Vanilla Implementation of GANs, not accounting for Wasserstein metrics, and hence relatively unstable. Also, the statistical and classification loss parameters could potentially be better refined for the problem at hand.
 <li><b>Getting rid of the Discriminator entirely</b></li> - As compared to Conditional GANs, the use of statistical parameters is better guided if we use a pretrained classifier to solve mode collapse, but a merger of the real discriminator with the aforementioned could lead to more efficient computations.
-<li><b>Intentionally weighting the gradient contributions to the loss functions</b></li> - Guided cost weightages could be fine tuned for more stable training and quicker convergence.
+<li><b>Intentionally weighting the gradient contributions to the loss functions and analasying the gradients closely</b></li> - Guided cost weightages could be fine tuned for more stable training and quicker convergence, and the Shannon Entropy contributions due to the random and discrete parts of the problem could be further analyzed.
 <li><b>Dimensional study, deciding the dimensions of the encoder vs. latent space</b></li> - GANs need a dimensional analysis. As of now, most of latent space representations are based on empiricism, and a fomalised approach to this problem could prove beneficial in preventing mode collapse (lesser likelihood for using one mode as a scapegoat).
 </ul>
 
