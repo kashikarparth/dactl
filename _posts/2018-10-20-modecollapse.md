@@ -12,10 +12,10 @@ published: true
 
 Generative Adversarial Models have really kicked off ever since Ian Goodfellow published his paper on them a few years ago. There have been major advancements and vast applications of GANs including Wasserstein GANs, Stack GANs, Wave GANs, etc. This study is an effort to understand one of the key underlying problems of the GAN architecture, known as "mode collapse" and to attempt at preventing and/or removing mode collapse from GANs in general.
 
-For this final objective, the following analysis is quintessential in understanding the situation in it's entireity :
+For this final objective, the following analysis is quintessential in understanding the situation in it's entirety:
 
 <ul>
-<li>How do Generative and Discriminative Networks work? What is their "learning curve"?</li>
+<li>How do Generative and Discriminative Networks work? What is their "learning curve"? (Brief overview only)</li>
 <li>What is the cause of mode collapse?</li>
 <li>Personal attempt to fix the problem</li>
 </ul>
@@ -41,7 +41,7 @@ The following is the loss function while training a Generator network during GAN
 
 <img src="../uploads/generator_loss.PNG"> 
 
-Diving a bit deeper into the problem, the basic intention of the loss function is to use the Discriminator gradients as a means for the Generator Network to converge to a mapping to the real data distributions. As we train the Generator by feeding ion random noise inputs  to generate from and computing the loss function on the generated data, the Nash Equilibrium expectation is that the Discriminator outputs a probability of 0.5 for both real and generated images, as they become indistinguishable from one another. 
+Diving a bit deeper into the problem, the basic intention of the loss function is to use the Discriminator gradients as a means for the Generator Network to converge to a mapping to the real data distributions. As we train the Generator by feeding ion random noise inputs to generate from and computing the loss function on the generated data, the Nash Equilibrium expectation is that the Discriminator outputs a probability of 0.5 for both real and generated images, as they become indistinguishable from one another. 
 
 The Generator Network (after training) is basically a mapping from a "latent space" of the dimensions of our Generator input, to the "real space" in which the real data distribution is depicted. Every random input to the Generator then corresponds to an output generated data point to be weighed as real or fake by the Discriminator. Here comes the kicker to all this, and to the method that I will be proposing : <b>The Generator Network learns certain directions (linear/non-linear) or rather, lower dimensional regions, to map to a certain specific feature of the real data distribution in order to fool the discriminator regardless of the input fed into it.</b> The following picture is a t-SNE latent space on the MNIST dataset, wherein clusters are formed for similar digits, indicating that the mapping function in this case has been able to extract features meaningful to human beings and encode it into regions of the latent space.
 
@@ -81,13 +81,13 @@ and essentially starts guessing on the following data, as it is indistinguishabl
 
 ...and this whole process repeats for ever changing "modes" of the data distribution. This is mode collapse. 
 
-This game of cat-and-mouse repeats ad nauseum, with the generator never being directly incentivised to cover both modes. In such a scenario the generator will exhibit very poor diversity amongst generated samples, which limits the usefulness of the learnt GAN. In reality, the severity of mode collapse varies from complete collapse (all generated samples are virtually identical) to partial collapse (most of the samples share some common properties). Unfortunately, mode collapse can be triggered in a seemingly random fashion, making it very difficult to play around with GAN architectures.
+This game of cat-and-mouse repeats ad nauseum, with the generator never being directly incentivized to cover both modes. In such a scenario the generator will exhibit very poor diversity amongst generated samples, which limits the usefulness of the learnt GAN. In reality, the severity of mode collapse varies from complete collapse (all generated samples are virtually identical) to partial collapse (most of the samples share some common properties). Unfortunately, mode collapse can be triggered in a seemingly random fashion, making it very difficult to play around with GAN architectures.
 
 Clearly, Mode Collapse is an <b>architectural</b> problem.
 
 ## The fix
 
-In my attempt, I view the basic problem of mode discovery as well as mode retention to fool the Discriminator. The most effective way to understand the real data distribution is via the use of a neural network classifier appropriately trained on the data. Let's assume we have a given data distribution, on which we fully train a classifier. We are now dealing with three spaces, the space with the real data distribution represented in the standard form, the calssification space of the newly trained network, and the space from which our generator maps out of. 
+In my attempt, I view the basic problem of mode discovery as well as mode retention to fool the Discriminator. The most effective way to understand the real data distribution is via the use of a neural network classifier appropriately trained on the data. Let's assume we have a given data distribution, on which we fully train a classifier. We are now dealing with three spaces, the space with the real data distribution represented in the standard form, the classification space of the newly trained network, and the space from which our generator maps out of. 
 
 The idea I propose is to develop a mechanism for the generator to be able recognise to various possible data clusters/modes at the same time, without constantly trying to just fool the discriminator. For this, we jump into a latent space, with extended dimensions as compared to a latent space dimensionality for the standard benchmark of the given dataset, intentionally. We then come up with a way to sectionalise the given space, into smaller subspaces, which then would be used to train the GAN as the regular generator method procedure. 
 
@@ -115,10 +115,10 @@ Coming soon.
 
 The following studies are worth looking into :
 <ul>
-<li>The penalizing factor from the classifier</li>  - The loss function is based on the Vanilla Implementation of GANs, not accounting for Wasserstein metrics, and hence relatively unstable. Also, the statistical and classification loss parameters could potentially be better refined for the problem at hand.
-<li>Getting rid of the Discriminator entirely</li> - As compared to Conditional GANs, the use of statistical parameters is better guided if we use a pretrained classifier to solve mode collapse, but a merger of the real discriminator with the aforementioned could lead to more efficient computations.
-<li>Intetionally weighting the gradient contributions to the loss functions</li> - Guided cost weightages could be fine tuned for more stable training and quicker convergence.
-<li>Dimensional study, deciding the dimensions of the encoder vs. latent space</li> - GANs need a dimensional analysis. As of now, most of latent space representations are based on empiricism, and a fomalised approach to this problem could prove beneficial in preventing mode collapse (lesser likelihood for using one mode as a scapegoat).
+<li><b>The penalizing factor from the classifier</b></li>  - The loss function is based on the Vanilla Implementation of GANs, not accounting for Wasserstein metrics, and hence relatively unstable. Also, the statistical and classification loss parameters could potentially be better refined for the problem at hand.
+<li><b>Getting rid of the Discriminator entirely</b></li> - As compared to Conditional GANs, the use of statistical parameters is better guided if we use a pretrained classifier to solve mode collapse, but a merger of the real discriminator with the aforementioned could lead to more efficient computations.
+<li><b>Intentionally weighting the gradient contributions to the loss functions</b></li> - Guided cost weightages could be fine tuned for more stable training and quicker convergence.
+<li><b>Dimensional study, deciding the dimensions of the encoder vs. latent space</b></li> - GANs need a dimensional analysis. As of now, most of latent space representations are based on empiricism, and a fomalised approach to this problem could prove beneficial in preventing mode collapse (lesser likelihood for using one mode as a scapegoat).
 </ul>
 
 ## References 
