@@ -115,10 +115,10 @@ Coming soon.
 
 The following studies are worth looking into :
 <ul>
-<li>The penalizing factor from the classifier</li>
-<li>Getting rid of the Discriminator entirely</li>
-<li>Intetionally weighting the gradient contributions to the loss functions</li>
-<li>Dimensional study, deciding the dimensions of the encoder vs. latent space</li>
+<li>The penalizing factor from the classifier</li>  - The loss function is based on the Vanilla Implementation of GANs, not accounting for Wasserstein metrics, and hence relatively unstable. Also, the statistical and classification loss parameters could potentially be better refined for the problem at hand.
+<li>Getting rid of the Discriminator entirely</li> - As compared to Conditional GANs, the use of statistical parameters is better guided if we use a pretrained classifier to solve mode collapse, but a merger of the real discriminator with the aforementioned could lead to more efficient computations.
+<li>Intetionally weighting the gradient contributions to the loss functions</li> - Guided cost weightages could be fine tuned for more stable training and quicker convergence.
+<li>Dimensional study, deciding the dimensions of the encoder vs. latent space</li> - GANs need a dimensional analysis. As of now, most of latent space representations are based on empiricism, and a fomalised approach to this problem could prove beneficial in preventing mode collapse (lesser likelihood for using one mode as a scapegoat).
 </ul>
 
 ## References 
