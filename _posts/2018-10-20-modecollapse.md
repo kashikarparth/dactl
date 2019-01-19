@@ -99,9 +99,9 @@ From then on, the following diagram depicts the training loop of the modified GA
 
 <img src="../uploads/training_loop.jpg"> 
 
-//loss function
+<img src="../uploads/GAN_LOSS.PNG"> 
 
-As seen, the loss function resembles closely the Vanilla GAN implementation, but with changes in the Generator loss function, now incorporating the losses due to CNN classifier as well as statistical parameters per batch, to maintain variety in the outputs per class. If the statistical loss aspect is disregarded, the Generator could just output a single digit for each class, regardless of the random input being provided to it, just based on the class label part of the input, and be able to bypass both the classifier and real/fake discriminators with ease. The values of the variances are taken to be equal to the real data variance as measured by the classifier.
+As seen, the above function is just an addition to generator of the vanilla setup GAN functions, now incorporating the losses due to CNN classifier as well as statistical parameters per batch, to maintain variety in the outputs per class. If the statistical loss aspect is disregarded, the Generator could just output a single digit for each class, regardless of the random input being provided to it, just based on the class label part of the input, and be able to bypass both the classifier and real/fake discriminators with ease. The values of the variances are taken to be equal to the real data variance as measured by the classifier.
 
 The following shows the intended mapping for the Generator from the latent space (extended) to the real space.
 
